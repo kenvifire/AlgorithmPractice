@@ -1,3 +1,4 @@
 .idea/*
 *.iml
 hackerrank/.idea/*
+hackerrank/out/*
