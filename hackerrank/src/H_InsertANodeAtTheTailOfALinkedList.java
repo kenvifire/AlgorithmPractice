@@ -8,13 +8,22 @@ public class H_InsertANodeAtTheTailOfALinkedList {
     public static void main(String[] args) {
         Node rootA = null;
         Node rootB = null;
-        System.out.println(CompareLists(rootA, rootB));
         rootA = Insert(rootA, 1);
-        System.out.println(CompareLists(rootA, rootB));
-        rootB = Insert(rootB, 1);
-        System.out.println(CompareLists(rootA, rootB));
-        rootB = Insert(rootB, 1);
-        System.out.println(CompareLists(rootA, rootB));
+        rootA = Insert(rootA, 1);
+        rootA = Insert(rootA, 3);
+        rootA = Insert(rootA, 3);
+        rootA = Insert(rootA, 5);
+        rootA = Insert(rootA, 6);
+
+        //rootB = Insert(rootB, 1);
+        //rootB = Insert(rootB, 2);
+//        rootB = Insert(rootB, 6);
+       // System.out.println(GetNode(rootA, 0));
+       // System.out.println(GetNode(rootA, 1));
+       // System.out.println(GetNode(rootA, 2));
+       // System.out.println(GetNode(rootA, 3));
+        Print(RemoveDuplicates(rootA));
+
 
 
 
@@ -159,7 +168,102 @@ public class H_InsertANodeAtTheTailOfALinkedList {
 
 
     }
+    static Node MergeLists(Node headA, Node headB) {
+        // This is a "method-only" submission.
+        // You only need to complete this method
+        Node pA = headA;
+        Node pB = headB;
+        Node head = null;
+        Node p = null;
+        while(pA != null && pB != null) {
+            if(pA.data < pB.data) {
+                if(p == null) {
+                    head = pA;
+                    p = pA;
+                }else {
+                    p.next = pA;
+                    p = p.next;
+                }
+                pA = pA.next;
+            }else {
+                if(p == null) {
+                    head = pB;
+                    p = pB;
+                }else {
+                    p.next = pB;
+                    p=p.next;
+                }
+                pB = pB.next;
+            }
+        }
+        while(pA != null) {
+            if(p == null) {
+                return pA;
+            }
+            p.next = pA;
+            pA = pA.next;
+        }
 
+        while(pB != null) {
+            if(p == null) {
+                return  pB;
+            }
+            p.next = pB;
+            p = p.next;
+            pB = pB.next;
+        }
+
+
+        return head;
+
+    }
+
+    static int GetNode(Node head,int n) {
+        // This is a "method-only" submission.
+        // You only need to complete this method.
+        Node p1 = head;
+        Node p2 = head;
+        while(n-->=0) {
+            p1 = p1.next;
+        }
+
+        while(p1 != null) {
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+
+        return p2.data;
+
+    }
+
+    static Node RemoveDuplicates(Node head) {
+        // This is a "method-only" submission.
+        // You only need to complete this method.
+        if(head == null || head.next == null) {
+            return head;
+        }
+        //init
+        Node p1 = head;
+        Node p2 = head.next;
+
+        while(p2 != null) {
+            // eq: remove node pointed by p2, p2 move on
+            if(p1.data == p2.data) {
+                p2 = p2.next;
+                p1.next = p2;
+            }
+            // not eq: p1 p2 both move on
+            else {
+                p1 = p2;
+                p2 = p2.next;
+
+            }
+
+        }
+        return head;
+
+
+    }
 
 
 
