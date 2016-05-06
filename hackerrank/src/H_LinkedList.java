@@ -3,7 +3,7 @@ import java.util.*;
 /**
  * Created by hannahzhang on 16/5/5.
  */
-public class H_InsertANodeAtTheTailOfALinkedList {
+public class H_LinkedList {
 
     public static void main(String[] args) {
         Node rootA = null;
@@ -14,7 +14,6 @@ public class H_InsertANodeAtTheTailOfALinkedList {
         //Node mergeNode = GetNode(rootA,2);
 
         rootB = Insert(rootB,1);
-        rootB.next = mergeNode;
 
 
 
@@ -87,9 +86,6 @@ public class H_InsertANodeAtTheTailOfALinkedList {
 
     }
 
-    static Node getNth(Node head, int position) {
-
-    }
 
     static Node InsertNth(Node head, int data, int position) {
         Node dataNode = new Node();
