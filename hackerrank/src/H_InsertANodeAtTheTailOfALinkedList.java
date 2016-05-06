@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by hannahzhang on 16/5/5.
@@ -9,11 +9,15 @@ public class H_InsertANodeAtTheTailOfALinkedList {
         Node rootA = null;
         Node rootB = null;
         rootA = Insert(rootA, 1);
-        rootA = Insert(rootA, 1);
+        rootA = Insert(rootA, 2);
         rootA = Insert(rootA, 3);
-        rootA = Insert(rootA, 3);
-        rootA = Insert(rootA, 5);
-        rootA = Insert(rootA, 6);
+        //Node mergeNode = GetNode(rootA,2);
+
+        rootB = Insert(rootB,1);
+        rootB.next = mergeNode;
+
+
+
 
         //rootB = Insert(rootB, 1);
         //rootB = Insert(rootB, 2);
@@ -22,7 +26,7 @@ public class H_InsertANodeAtTheTailOfALinkedList {
        // System.out.println(GetNode(rootA, 1));
        // System.out.println(GetNode(rootA, 2));
        // System.out.println(GetNode(rootA, 3));
-        Print(RemoveDuplicates(rootA));
+        System.out.println(FindMergeNode(rootA, rootB));
 
 
 
@@ -80,6 +84,10 @@ public class H_InsertANodeAtTheTailOfALinkedList {
             p=p.next;
         }
 
+
+    }
+
+    static Node getNth(Node head, int position) {
 
     }
 
@@ -265,7 +273,65 @@ public class H_InsertANodeAtTheTailOfALinkedList {
 
     }
 
+    static int HasCycle(Node head) {
+        if(head == null || head.next == null) {
+            return 0;
+        }
+        Node p1 = head;
+        Node p2 = head.next.next;
 
+        while(p2!=null && p2.next != null) {
+            if(p1 == p2) return 1;
+            p1 = p1.next;
+            p2 = p2.next.next;
+        }
+
+       return 0;
+
+
+    }
+
+    static int FindMergeNode(Node headA, Node headB) {
+        // Complete this function
+        // Do not write the main method.
+        HashSet<Node> visited = new HashSet<Node>();
+        Node p = headA;
+        while(p != null) {
+            visited.add(p);
+            p = p.next;
+        }
+        p = headB;
+        while (p != null) {
+            if(visited.contains(p)) {
+                return p.data;
+            }
+            p = p.next;
+        }
+
+        return 0;
+
+    }
+
+    static int FindMergeFast(Node headA, Node headB) {
+        Node pA = headA;
+        Node pB = headB;
+
+        while (pA != pB) {
+            if(pA == null ) {
+                pA = headB;
+            }else {
+                pA = pA.next;
+            }
+
+            if(pB == null) {
+                pB = headA;
+            }else {
+                pB = pB.next;
+            }
+        }
+
+        return pA.data;
+    }
 
 
 }
