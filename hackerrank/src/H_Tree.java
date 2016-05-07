@@ -222,7 +222,26 @@ public class H_Tree {
 
     }
 
+    static Node lca(Node root,int v1,int v2)
+    {
+        int big = v1 > v2 ? v1 : v2;
+        int small = v1 > v2 ? v2: v1;
 
+        Node p = root;
+
+        while(p != null) {
+            if(big < p.data) {
+                p = p.left;
+            }else if(small > p.data) {
+                p = p.right;
+            }else {
+                break;
+            }
+        }
+
+        return p;
+
+    }
 
 }
 
