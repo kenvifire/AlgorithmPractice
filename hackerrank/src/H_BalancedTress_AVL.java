@@ -26,6 +26,13 @@ public class H_BalancedTress_AVL {
                 if(currentNode == null) {
                     parentNode.left = valNode;
                     valNode.ht = parentNode.ht + 1;
+                    if(height(parentNode) - height(valNode) == 2) {
+                        if(parentNode.val < currentNode.val) {
+                            rightRotate(parentNode);
+                        }else {
+                            rightLeftRotate(parentNode);
+                        }
+                    }
 
                     return root;
                 }
@@ -34,6 +41,14 @@ public class H_BalancedTress_AVL {
                 if(currentNode == null) {
                     parentNode.right = valNode;
                     valNode.ht = parentNode.ht + 1;
+                    if(height(parentNode) - height(valNode) == 2) {
+                        if(parentNode.val > currentNode.val) {
+                            leftRotate(parentNode);
+                        }else {
+                            leftRightRotate(parentNode);
+                        }
+                    }
+
                     return root;
                 }
             }
@@ -41,6 +56,10 @@ public class H_BalancedTress_AVL {
 
         }
 
+    }
+
+    static int height(Node node) {
+        return node == null ? -1 : node.ht;
     }
 
     /**
@@ -143,6 +162,10 @@ public class H_BalancedTress_AVL {
 
 
     public static void main(String[] args){
-        //TODO
+        Node root = insert(null, 1);
+        root = insert(root ,2);
+        root = insert(root ,3);
+        root = insert(root ,4);
+
     }
 }
