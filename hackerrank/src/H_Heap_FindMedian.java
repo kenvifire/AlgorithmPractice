@@ -13,8 +13,8 @@ public class H_Heap_FindMedian {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
-        PriorityQueue<Integer> maxQueue = new PriorityQueue<Integer>(Comparator.<Integer>naturalOrder());
-        PriorityQueue<Integer> minQueue = new PriorityQueue<Integer>(Comparator.<Integer>reverseOrder());
+        PriorityQueue<Integer> maxQueue = new PriorityQueue<Integer>(Comparator.<Integer>reverseOrder());
+        PriorityQueue<Integer> minQueue = new PriorityQueue<Integer>(Comparator.<Integer>naturalOrder());
         int a;
         for (int i = 1; i <= N; i++) {
             a = scanner.nextInt();
@@ -41,9 +41,9 @@ public class H_Heap_FindMedian {
             //find mind
             double min = 0;
             if(maxQueue.size() > minQueue.size()) {
-                min = maxQueue.size();
+                min = maxQueue.peek();
             }else if(minQueue.size() > maxQueue.size()) {
-                min = minQueue.size();
+                min = minQueue.peek();
             }else if(!minQueue.isEmpty() && minQueue.size() == maxQueue.size()) {
                 min = (1.0 * maxQueue.peek() + 1.0 * minQueue.peek())/2;
             }
