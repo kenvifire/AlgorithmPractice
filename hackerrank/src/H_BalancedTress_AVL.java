@@ -10,52 +10,38 @@ public class H_BalancedTress_AVL {
     }
 
     static Node insert(Node root, int val) {
+
         Node valNode = new Node();
         valNode.val = val;
 
         if(root == null) {
-            valNode.ht = 1;
-            return valNode;
-        }
-        Node parentNode =  null;
-        Node currentNode = root;
-        while(true) {
-            parentNode = currentNode;
-            if(val < parentNode.val) {
-                currentNode = currentNode.left;
-                if(currentNode == null) {
-                    parentNode.left = valNode;
-                    valNode.ht = parentNode.ht + 1;
-                    if(height(parentNode) - height(valNode) == 2) {
-                        if(parentNode.val < currentNode.val) {
-                            rightRotate(parentNode);
-                        }else {
-                            rightLeftRotate(parentNode);
-                        }
-                    }
+            root = valNode;
+        }else if(val < root.val) {
+            root.left = insert(root.left, val);
 
-                    return root;
-                }
-            }else {
-                currentNode = currentNode.right;
-                if(currentNode == null) {
-                    parentNode.right = valNode;
-                    valNode.ht = parentNode.ht + 1;
-                    if(height(parentNode) - height(valNode) == 2) {
-                        if(parentNode.val > currentNode.val) {
-                            leftRotate(parentNode);
-                        }else {
-                            leftRightRotate(parentNode);
-                        }
-                    }
-
-                    return root;
+            if (height(root.left) - height(root.right) == 2) {
+                if (val < root.left.val) {
+                    root = rotateLeftChild(root);
+                } else {
+                    root = doubleRotateLeftChild(root);
                 }
             }
-
-
+        } else if(val > root.val) {
+            root.right  = insert(root.right, val);
+            if(height(root.right) - height(root.left) == 2) {
+                if (val > root.right.val)  {
+                    root = rotateRightChild(root);
+                }else {
+                    root = doubleRotateRightChild(root);
+                }
+            }
+        }else {
+            //nothing for dup
         }
 
+        root.ht = Math.max(height(root.left), height(root.right)) + 1;
+
+        return root;
     }
 
     static int height(Node node) {
@@ -72,17 +58,13 @@ public class H_BalancedTress_AVL {
      * @return
      */
 
-    static Node rightRotate(Node n) {
+    static Node rotateLeftChild(Node n) {
         Node c = n;
         Node b = n.left;
-        Node a = b.left;
-        b.ht = b.ht - 1;
-        c.ht = c.ht + 1;
-        a.ht = a.ht - 1;
-
-
+        c.left = b.right;
         b.right = c;
-        c.left = null;
+        c.ht = Math.max(height(c.left), height(c.right)) + 1;
+        b.ht = Math.max(height(b.left), c.ht) + 1;
         return b;
     }
 
@@ -98,18 +80,13 @@ public class H_BalancedTress_AVL {
      * @param n
      * @return
      */
-    static Node leftRotate(Node n) {
-        Node b = n.right;
+    static Node rotateRightChild(Node n) {
         Node a = n;
-        Node c = b.right;
-
-        b.ht = b.ht -1;
-        a.ht = a.ht + 1;
-        c.ht = c.ht - 1;
-
+        Node b = n.right;
+        a.right = b.left;
         b.left = a;
-        a.right = null;
-
+        a.ht = Math.max(height(a.left), height(a.right)) + 1;
+        b.ht = Math.max(height(b.right), a.ht) + 1;
         return b;
     }
 
@@ -122,17 +99,10 @@ public class H_BalancedTress_AVL {
      * @param n
      * @return
      */
-    static Node leftRightRotate(Node n) {
-        Node c = n;
-        Node a = c.left;
-        Node b = a.right;
-        a.ht = a.ht + 1;
-        b.ht = b.ht - 1;
+    static Node doubleRotateLeftChild(Node n) {
+        n.left =  rotateRightChild(n.left);
 
-        c.left = b;
-        b.left = a;
-        a.right = null;
-        return leftRotate(c);
+       return rotateLeftChild(n);
 
     }
 
@@ -146,18 +116,10 @@ public class H_BalancedTress_AVL {
      * @param n
      * @return
      */
-    static Node rightLeftRotate(Node n ) {
-        Node b = n;
-        Node c = n.right;
-        Node a = c.left;
-        a.ht = a.ht - 1;
-        b.ht = b.ht + 1;
+    static Node doubleRotateRightChild(Node n) {
+        n.right = rotateLeftChild(n.right);
+        return rotateRightChild(n);
 
-        b.right = a;
-        a.left = c;
-        c.left = null;
-
-        return rightRotate(a);
     }
 
 
@@ -166,6 +128,8 @@ public class H_BalancedTress_AVL {
         root = insert(root ,2);
         root = insert(root ,3);
         root = insert(root ,4);
+        root = insert(root ,5);
+        root = insert(root ,6);
 
     }
 }
