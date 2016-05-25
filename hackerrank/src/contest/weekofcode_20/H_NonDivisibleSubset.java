@@ -27,7 +27,7 @@ public class H_NonDivisibleSubset {
          }
 
 
-         System.out.printf(String.valueOf(cnt[n][n-1]));
+         //System.out.printf(String.valueOf(cnt[n][n-1]));
 
       }
 }
