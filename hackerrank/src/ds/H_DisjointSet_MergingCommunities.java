@@ -1,42 +1,36 @@
 package ds;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
  * Created by kenvi on 16/5/26.
  */
-public class H_DisjointSet_ComponentsInAGraph {
+public class H_DisjointSet_MergingCommunities {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
+        int Q = scanner.nextInt();
 
-        int b,g;
 
-        WeightedQuickUnionUF uf = new WeightedQuickUnionUF(2*N + 1);
+        WeightedQuickUnionUF uf = new WeightedQuickUnionUF(N + 1);
 
-        while( N --> 0) {
-            b = scanner.nextInt();
-            g = scanner.nextInt();
-            uf.union(b,g);
+        String line = null;
+        scanner.nextLine();
+        while( Q --> 0) {
+            line = scanner.nextLine();
+            String[] array = line.split(" ");
+            int p,q;
+            if(line.charAt(0) == 'M') {
+                p = Integer.valueOf(array[1]);
+                q = Integer.valueOf(array[2]);
+                uf.union(p,q);
+            }else {
+                p = Integer.valueOf(array[1]) ;
+                System.out.println(uf.getComponentSize(p));
+            }
         }
-        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
-        for (int i = 1; i< uf.sz.length; i++) {
-
-            int size = uf.getComponentSize(i);
-            if(size == -1) continue;
-            if(size > max) max = size;
-            if(size < min) min = size;
-
-        }
-
-        System.out.println(min + " " +max);
 
 
 
@@ -47,10 +41,10 @@ public class H_DisjointSet_ComponentsInAGraph {
         public int[] sz;
         public WeightedQuickUnionUF(int N) {
             id = new int[N];
-            for (int i = 0; i < N; i++) id[i] = -1;
+            for (int i = 0; i < N; i++) id[i] = i;
             sz = new int[N];
             for (int i = 0; i < N; i++) {
-                sz[i] = -1;
+                sz[i] = 1;
             }
 
         }
@@ -61,16 +55,11 @@ public class H_DisjointSet_ComponentsInAGraph {
         }
 
         public int getComponentSize(int p) {
-            if(id[p] == -1)  {
-                return -1;
-            }
             return sz[find(p)];
 
         }
 
         public void union(int p, int q) {
-            if(id[p] == -1) {id[p] = p; sz[p] = 1;}
-            if(id[q] == -1) {id[q] = q; sz[q] = 1;}
             int i = find(p);
             int j = find(q);
             if(i == j) return;
