@@ -135,6 +135,74 @@ public class H_BalancedTress_AVL {
 
     }
 
+    public static Node remove(int x, Node t) {
+        if (t==null)    {
+            return null;
+        }
+
+        if (x < t.val  ) {
+            t.left = remove(x,t.left);
+            int l = t.left != null ? t.left.ht: 0;
+
+            if((t.right != null) && (t.right.ht- l >= 2)) {
+                int rightHeight = t.right.right != null ? t.right.right.ht: 0;
+                int leftHeight = t.right.left != null ? t.right.left.ht: 0;
+
+                if(rightHeight >= leftHeight)
+                    t = rotateLeftChild(t);
+                else
+                    t = doubleRotateRightChild(t);
+            }
+        }
+        else if (x > t.val) {
+            t.right = remove(x,t.right);
+            int r = t.right != null ? t.right.ht: 0;
+            if((t.left != null) && (t.left.ht- r >= 2)) {
+                int leftHeight = t.left.left != null ? t.left.left.ht: 0;
+                int rightHeight = t.left.right != null ? t.left.right.ht: 0;
+                if(leftHeight >= rightHeight)
+                    t = rotateRightChild(t);
+                else
+                    t = doubleRotateLeftChild(t);
+            }
+        }
+      /*
+         Here, we have ended up when we are node which shall be removed.
+         Check if there is a left-hand node, if so pick out the largest element out, and move down to the root.
+       */
+        else if(t.left != null) {
+            t.val = findMax(t.left);
+            remove(t.val, t.left);
+
+            if((t.right != null) && (t.right.ht- t.left.ht>= 2)) {
+                int rightHeight = t.right.right != null ? t.right.right.ht: 0;
+                int leftHeight = t.right.left != null ? t.right.left.ht: 0;
+
+                if(rightHeight >= leftHeight)
+                    t = rotateLeftChild(t);
+                else
+                    t = doubleRotateRightChild(t);
+            }
+        }
+
+        else
+            t = (t.left != null) ? t.left : t.right;
+
+        if(t != null) {
+            int leftHeight = t.left != null ? t.left.ht: 0;
+            int rightHeight = t.right!= null ? t.right.ht: 0;
+            t.ht= Math.max(leftHeight,rightHeight) + 1;
+        }
+        return t;
+    }
+
+    static int findMax(Node t)
+    {
+        while( t.right != null )
+            t = t.right;
+        return t.val;
+    }
+
 
     public static void main(String[] args){
         Node root = insert(null, 1);
@@ -143,6 +211,8 @@ public class H_BalancedTress_AVL {
         root = insert(root ,4);
         root = insert(root ,5);
         root = insert(root ,6);
+        root = remove(6, root);
+        root = remove(2, root);
 
     }
 }
