@@ -423,7 +423,7 @@ public class H_BalancedTrees_MedianUpdates {
                 value = value -1;
                 countMap.put(x, value);
                 if(value == 0) {
-                    //remove(x);
+                    remove(x);
                     countMap.remove(x);
                 }
                 return true;
