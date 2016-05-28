@@ -1,13 +1,18 @@
 package ds;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.*;
 
 /**
  * Created by kenvi on 16/5/27.
  */
 public class H_DisjointSet_KunduAndTree {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws Exception{
+        FileInputStream in = new FileInputStream(new File("/tmp/in"));
+        Scanner scanner = new Scanner(in);
+        //Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
         scanner.nextLine();
@@ -25,33 +30,36 @@ public class H_DisjointSet_KunduAndTree {
             }
 
         }
-        long n1 = 0, n2 = 0, n3 = 0;
-        for (int i =1; i < uf.getSize() ; i++) {
-            int size = uf.getComponentSize(i);
-            if(size == 1) n1++;
-            else if(size == 2) n2++;
-            else if(size > 2) n3++;
+        int size1 = 0;
+        Map<Integer,Integer> componentSizeMap = new HashMap<>();
+        for (int i =1; i <= uf.getSize() ; i++) {
+            int root = uf.find(i);
+            if(uf.getComponentSize(root) == 1) size1++;
+            Integer value = componentSizeMap.get(root);
+            if(value == null) {
+                componentSizeMap.put(root, 1);
+            }else {
+                componentSizeMap.put(root, value+1);
+            }
         }
+        long size = uf.getSize();
 
-        long total = 0;
-        //3 from red
         long mod = 1000000000+7;
-        if(n1 >= 3) {
-            total += (n1 * (n1-1) * (n1-2)/6);
+        long total = size * (size - 1) * (size -2)/6;
+
+        //remove black edged combinations
+        long total2 = 0, total3 = 0;
+        for (Map.Entry<Integer, Integer> entry : componentSizeMap.entrySet()) {
+            Integer count = entry.getValue();
+            //two black, one other
+            if(count >= 2 ) {
+                total -= count * (count -1 ) / 2 * (size - count);
+            }
+
+            if(count >= 3) {
+                total -= count * (count - 1) * (count - 2) / 6;
+            }
         }
-
-        //2 from red, one from black 2 or 3
-        if(n1 >= 2) {
-            total += (n1 * (n1 - 1) / 2) * (n2 + n3);
-        }
-
-        //1 from red, two from black (one from 2 and one from three)
-        if(n1 >= 1) {
-            total += (n1 * n2 * n3);
-        }
-
-
-
 
         System.out.println(total%mod);
 
@@ -69,16 +77,17 @@ public class H_DisjointSet_KunduAndTree {
         private int size ;
         public WeightedQuickUnionUF(int N) {
             id = new int[N];
-            for (int i = 0; i < N; i++) id[i] = i;
+            for (int i = 1; i < N; i++) id[i] = i;
             sz = new int[N];
-            for (int i = 0; i < N; i++) {
+            for (int i = 1; i < N; i++) {
                 sz[i] = 1;
             }
             isBlack = new boolean[N];
-            for (int i = 0; i < N; i++) {
+            for (int i = 1; i < N; i++) {
                 isBlack[i] = false;
             }
-            size = N;
+            size = N - 1;
+            count = N - 1;
 
         }
 
@@ -100,12 +109,10 @@ public class H_DisjointSet_KunduAndTree {
 
         }
 
-        public void unionBlack(int p, int q) {
-            isBlack[p] = true;
-            isBlack[q] = true;
-            union(p,q);
-
+        public int getComponentCount() {
+            return count -1;
         }
+
         public void union(int p, int q) {
             int i = find(p);
             int j = find(q);
@@ -119,6 +126,7 @@ public class H_DisjointSet_KunduAndTree {
                 sz[i] += sz[j];
 
             }
+            count--;
         }
 
     }
