@@ -10,9 +10,9 @@ import java.util.*;
 public class H_DisjointSet_KunduAndTree {
 
     public static void main(String[] args) throws Exception{
-        FileInputStream in = new FileInputStream(new File("/tmp/in"));
-        Scanner scanner = new Scanner(in);
-        //Scanner scanner = new Scanner(System.in);
+        //FileInputStream in = new FileInputStream(new File("/tmp/in"));
+        //Scanner scanner = new Scanner(in);
+        Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
 
         scanner.nextLine();
@@ -48,9 +48,8 @@ public class H_DisjointSet_KunduAndTree {
         long total = size * (size - 1) * (size -2)/6;
 
         //remove black edged combinations
-        long total2 = 0, total3 = 0;
         for (Map.Entry<Integer, Integer> entry : componentSizeMap.entrySet()) {
-            Integer count = entry.getValue();
+            Long count = entry.getValue().longValue();
             //two black, one other
             if(count >= 2 ) {
                 total -= count * (count -1 ) / 2 * (size - count);
