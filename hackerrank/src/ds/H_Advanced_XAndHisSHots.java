@@ -50,14 +50,16 @@ public class H_Advanced_XAndHisSHots {
 
         int total = 0;
 
-        int i = 0, j = 0;
+        int i = 0, j = 0, current = 0;
         while (i < shots.length && j < players.length) {
-            if((shots[i].y >= players[j].x && shots[i].x<=players[j].x)
-                    ||(shots[i].y>=players[j].y && shots[i].x<=players[j].y)) {
-                total++;
+            if(shots[i].x <=players[j].y) {
+                current++;
                 j++;
             }else {
                 i++;
+                total+=current;
+                current--;
+
             }
         }
         System.out.println(total);
