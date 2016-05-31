@@ -29,7 +29,15 @@ public class H_Advanced_XAndHisSHots {
         int x, y;
         for (int i = 0; i < N; i ++ ) {
             x = scanner.nextInt();
-            y = scanner.nextInt(); Segment segment = new Segment(); segment.x = x; segment.y = y; shots[i] = segment; } for (int i = 0; i < M; i ++ ) { x = scanner.nextInt();
+            y = scanner.nextInt();
+            Segment segment = new Segment();
+            segment.x = x;
+            segment.y = y;
+            shots[i] = segment;
+        }
+
+        for (int i = 0; i < M; i ++ ) {
+            x = scanner.nextInt();
             y = scanner.nextInt();
             Segment segment = new Segment();
             segment.x = x;
@@ -42,9 +50,15 @@ public class H_Advanced_XAndHisSHots {
 
         int total = 0;
 
-        for (int i = 0; i < N; i ++) {
-            int start = shots[i].x;
-            int end = shots[i].y;
+        int i = 0, j = 0;
+        while (i < shots.length && j < players.length) {
+            if((shots[i].y >= players[j].x && shots[i].x<=players[j].x)
+                    ||(shots[i].y>=players[j].y && shots[i].x<=players[j].y)) {
+                total++;
+                j++;
+            }else {
+                i++;
+            }
         }
         System.out.println(total);
     }
