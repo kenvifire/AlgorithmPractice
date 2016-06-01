@@ -52,7 +52,7 @@ public class H_Advanced_XAndHisSHots {
 
         int i = 0, j = 0, current = 0;
         while (i < shots.length && j < players.length) {
-            if(shots[i].x <=players[j].y) {
+            if(shots[i].y <= players[j].x) {
                 current++;
                 j++;
             }else {
