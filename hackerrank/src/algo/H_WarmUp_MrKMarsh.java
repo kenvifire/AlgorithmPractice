@@ -31,13 +31,13 @@ public class H_WarmUp_MrKMarsh {
 //        }
 
         for (int a = 0; a < M; a++) {
-            for (int b = 0; b < a ; b++) {
+            for (int b = 0; b < N ; b++) {
+                if(N * a - M*b > 0) continue; // only down triangle
 
                 if(matrix[a][b]== -1) continue;//step on marsh
                 for (int c = 0; c < M; c++) {
-//                    for (int d = c; d < N; d++) {
-                     for (int d = c; d < N; d++) {
-                        System.out.println(String.format("new max(%s,%s)-(%s,%s)",a,b,c,d));
+                     for (int d = 0; d < N; d++) {
+                        if(N * c - M*d < 0) continue; // only down triangle
                         if(matrix[c][d] == -1) continue;// step on marsh
                         if(!checkMarsh(matrix,c,d,a,b)) continue; // has marsh
                         if(a!= c && b!=d) {
