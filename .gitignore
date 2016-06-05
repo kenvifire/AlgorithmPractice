@@ -2,3 +2,4 @@
 *.iml
 hackerrank/.idea/*
 hackerrank/out/*
+py/.idea/*
