@@ -8,26 +8,34 @@
 #include <algorithm>
 using namespace std;
 
-#define SetBit(a,k) a[(k/32)] = a[(k/32)] | 1<<a[(k%32)]
-#define GetBit(a,k) a[(k/32)] & 1<<a[(k%32)]
-int main() {
-    int N ,S,P,Q;
-    cin >> N >> S >> P >> Q;
-    vector<int> v(N/32+1);
-    int acc = S;
-    SetBit(v, acc);
-    for (int i = 1; i < N; i++) {
-        acc = acc * P + Q % (1 << 31);
-        SetBit(v, acc);
-    }
+#define SetBit(a,k)  ( a[(k/32)] = a[(k/32)] | 1<<a[(k%32)] )
+#define TestBit(a,k) ( a[(k/32)] & (1<<(k%32)) )
 
-    int cnt = 0;
-    for (int j = 0; j < v.size()*8; ++j) {
-        if(GetBit(v,j)) {
-           cnt ++;
+typedef  unsigned long long ULLONG;
+int main() {
+    ULLONG N ,S,P,Q;
+    cin >> N >> S >> P >> Q;
+
+    ULLONG size = static_cast<ULLONG>(pow(2, 31));
+
+    int *bitset = new int[size / 32];
+    memset(bitset, 0, sizeof(int) * (size / 32));
+
+    ULLONG  acc = S % size;
+    SetBit(bitset, acc);
+    int count = 1;
+    for (ULLONG i = 1; i < N; i++) {
+        acc = acc * P + Q ;
+        acc = acc % size;
+
+        if(!TestBit(bitset, acc)) {
+            SetBit(bitset, acc);
+            count++;
         }
     }
-    cout << cnt;
+//
+    cout << count;
+    delete[] bitset;
     return 0;
 }
 
