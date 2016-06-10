@@ -8,8 +8,8 @@
 #include <algorithm>
 using namespace std;
 
-#define SetBit(a,k)  ( a[(k/32)] = a[(k/32)] | 1<<a[(k%32)] )
-#define TestBit(a,k) ( a[(k/32)] & (1<<(k%32)) )
+#define SetBit(A,k)     ( A[(k/32)] |= (1 << (k%32)) )
+#define TestBit(A,k)    ( A[(k/32)] & (1 << (k%32)) )
 
 typedef  unsigned long long ULLONG;
 int main() {
@@ -21,12 +21,12 @@ int main() {
     int *bitset = new int[size / 32];
     memset(bitset, 0, sizeof(int) * (size / 32));
 
-    ULLONG  acc = S % size;
+    ULLONG  acc = S % size, tmp;
     SetBit(bitset, acc);
     int count = 1;
     for (ULLONG i = 1; i < N; i++) {
-        acc = acc * P + Q ;
-        acc = acc % size;
+        tmp = acc * P + Q ;
+        acc = tmp % size;
 
         if(!TestBit(bitset, acc)) {
             SetBit(bitset, acc);
