@@ -4,21 +4,34 @@
 #include <iostream>
 #include <deque>
 using namespace std;
+
 void printKMax(int arr[], int n, int k){
-    deque<int> dq;
-    int max = 0;
-    for (int i = 0; i <= n-k; i++) {
-        max = 0;
-        for (int j = i; j < i+k ; j++) {
-            if(arr[j] > max)  {
-                max = arr[j];
-            }
-//            cout << j << ' ';
+    deque<int> dq(k);
+
+    int i;
+    for (i = 0; i < k; ++i) {
+        while (!dq.empty() && arr[i] >= arr[dq.back()]) {
+            dq.pop_back();
         }
-//        cout << endl;
-        cout << max << ' ';
+        dq.push_back(i);
     }
-    cout <<endl;
+
+    for (; i < n; ++i) {
+        cout << arr[dq.front()] << ' ';
+
+        while (!dq.empty() && dq.front() <= i - k) {
+            dq.pop_front();
+        }
+
+        while (!dq.empty() && arr[i] >= arr[dq.back()]) {
+            dq.pop_back();
+        }
+        dq.push_back(i);
+
+    }
+    cout << arr[dq.front()];
+    cout << endl;
+
 }
 int main(){
 
