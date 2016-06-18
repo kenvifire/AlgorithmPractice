@@ -10,7 +10,36 @@ public class H_Implementation_Encryption {
         Scanner in = new Scanner(System.in);
         String s = in.next();
         StringBuilder sb = new StringBuilder(s.replaceAll(" ",""));
-        int L = sb.length();
+        long L = sb.length();
+        double root = Math.sqrt(L);
+        int ceil = (int)Math.ceil(root);
+        int floor = (int)Math.floor(root);
 
+        int row,column;
+        if(ceil == floor) {
+            row = ceil;
+            column = ceil;
+        }else {
+            if(floor * ceil >= L) {
+               column = ceil;
+               row = floor;
+            }else {
+                row = ceil;
+                column = ceil;
+            }
+        }
+
+        for (int i = 0; i < column; i++) {
+            for (int j = 0; j < row; j++) {
+                if(j*column + i < L) {
+                    System.out.print(sb.charAt(j*column + i));
+                }
+            }
+            System.out.print(' ');
+        }
     }
+
+
+
+
 }
