@@ -23,17 +23,28 @@ public class H_String_PalindromeIndex {
                     break;
                 }
             }
-            System.out.println(new StringBuilder(line).reverse());
+//            System.out.println(new StringBuilder(line).reverse());
             if(l >= r) {
                 System.out.println(-1);
                 continue;
             }
+            int tempL = l, tempR = r;
 
-            if(line.charAt(l+1) == line.charAt(r)) {
-                System.out.println(l);
-            }else {
-                System.out.println(r);
+            l++;
+            boolean isLeft = true;
+
+            while (l < r) {
+                if(line.charAt(l) == line.charAt(r)) {
+                    l++;
+                    r--;
+                }else {
+                    isLeft = false;
+                    break;
+                }
             }
+
+            System.out.println(isLeft? tempL : tempR);
+
 
         }
 
