@@ -21,9 +21,29 @@ public class H_Implementation_MatrixRotationAlgo {
             }
         }
 
-        for (int i = 1; i <= 2 * M + 2 * N ; i++) {
-            int[] index = getIndex(0,0, N, M, i);
-            System.out.println(String.format("%s:{%s,%s}", i, index[0], index[1]));
+        int x = 0, y = 0, h = M, w = N, r = 0;
+        int min = M < N ? M : N;
+
+        while (R -- > 0) {
+            while (x < min/2) {
+                for (int i = 0; i < 2 * (M - 1) + 2 * (N - 1) - 1; i++) {
+                    int[] index_a = getIndex(x, y, N, M, i);
+                    int[] index_b = getIndex(x, y, N, M, i + 1);
+                    int tmp = matrix[index_a[0]][index_a[1]];
+                    matrix[index_a[0]][index_a[1]] = matrix[index_b[0]][index_b[1]];
+                    matrix[index_b[0]][index_b[1]] = tmp;
+                }
+                x++;
+                y++;
+            }
+        }
+
+
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
         }
 
 
@@ -38,17 +58,17 @@ public class H_Implementation_MatrixRotationAlgo {
     public static int[] getIndex(int x, int y, int w, int h, int i) {
         int[] index = new int[2];
         i  = i % (2 * w + 2 * h);
-        if(i < w) {
+        if(i < w-1) {
             index[0] = x;
             index[1] = i;
-        }else if(i > w && i <= w+h) {
-            index[0] = x + (i- w);
-            index[1] = y + w;
-        }else if(i > w+h && i <= 2*w +h ) {
-            index[0] = x + h;
-            index[1] = y + (2 * w +h - i );
+        }else if(i >= w-1 && i < w+h-1) {
+            index[0] = x + (i- w) + 1;
+            index[1] = y + w -1;
+        }else if(i >= w+h-1 && i < 2*w +h -2) {
+            index[0] = x + h -1;
+            index[1] = y + (2 * w +h - i ) - 3;
         }else {
-            index[0]= x + (2*w + 2*h - i);
+            index[0]= x + (2*w + 2*h - i -4);
             index[1] = y;
         }
         return index;
