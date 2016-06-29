@@ -18,12 +18,14 @@ public class H_String_SherlockAndAnagrams {
 
             int count = 0;
             String sub1, sub2;
-            for (int len = 1; len < line.length() - 1; len++) {
+            for (int len = 1; len < line.length() ; len++) {
                 for (int i = 0; i < line.length() - len; i++) {
                     sub1 = line.substring(i, i + len);
                     for (int j = i + 1; j < line.length() - len + 1; j++) {
                         sub2 = line.substring(j, j + len);
-                        if(isAnagrams(sub1,sub2)) count++;
+                        boolean isAnagrams = isAnagrams(sub1, sub2) ;
+//                        System.out.println(String.format("%s-%s:%s",sub1, sub2, isAnagrams));
+                        if(isAnagrams) count++;
                     }
                 }
             }
@@ -44,7 +46,7 @@ public class H_String_SherlockAndAnagrams {
                 str1Cnt.put(str1.charAt(i), v1+1);
             }
 
-            Integer v2 = str1Cnt.get(str2.charAt(i));
+            Integer v2 = str2Cnt.get(str2.charAt(i));
             if(v2 == null) {
                 str2Cnt.put(str2.charAt(i), 1);
             }else {
@@ -55,7 +57,10 @@ public class H_String_SherlockAndAnagrams {
         if(str1Cnt.size() != str2Cnt.size()) return false;
 
         for (Map.Entry<Character,Integer> entry : str1Cnt.entrySet()) {
-            if(entry.getValue().intValue() != str1Cnt.get(entry.getKey())) return false;
+            Character key = entry.getKey();
+            Integer v1 = entry.getValue();
+            Integer v2 = str2Cnt.get(key);
+            if(v2 == null || v1.intValue() != v2.intValue()) return false;
         }
         return true;
     }
