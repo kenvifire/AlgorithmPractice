@@ -39,10 +39,10 @@ public class LazySorting {
            }
         }
 
-//        if(sortCnt == total) {
-//            System.out.println("0.000000");
-//            return;
-//        }
+        if(sortCnt == total) {
+            System.out.println("0.000000");
+            return;
+        }
         double result = (1.0 * total) / (1.0* sortCnt);
         System.out.println(String.format("%.6f", result));
 
