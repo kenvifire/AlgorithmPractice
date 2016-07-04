@@ -19,8 +19,10 @@ public class LazySorting {
         N = scanner.nextInt();
         int p;
         Map<Integer,Integer> countMap = new HashMap<Integer,Integer>();
+        int[] list = new int[N];
         for (int i = 0; i < N; i++) {
             p = scanner.nextInt();
+            list[i] = p;
             Integer value = countMap.get(p);
             if(value == null) {
                 countMap.put(p,1);
@@ -32,12 +34,10 @@ public class LazySorting {
         long total = factorial(N);
         long sortCnt = 1;
         for (Map.Entry<Integer, Integer> entry: countMap.entrySet()){
-           if(entry.getValue() > 1)  {
                sortCnt *= factorial(entry.getValue());
-           }
         }
 
-        if(sortCnt == total) {
+        if(isSorted(list)) {
             System.out.println("0.000000");
             return;
         }
@@ -54,5 +54,12 @@ public class LazySorting {
             fac[n] = n * factorial(n-1);
             return fac[n];
         }
+    }
+
+    static boolean isSorted(int[] list) {
+        for (int i = 0; i < list.length - 1; i++) {
+           if(list[i] > list[i+1]) return false;
+        }
+        return true;
     }
 }
