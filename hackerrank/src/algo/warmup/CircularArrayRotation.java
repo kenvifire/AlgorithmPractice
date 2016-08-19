@@ -11,6 +11,7 @@ public class CircularArrayRotation {
         Scanner scanner = new Scanner(System.in);
         n = scanner.nextInt();
         k = scanner.nextInt();
+        k = k %n;
         q = scanner.nextInt();
         int[] a = new int [n];
         for (int i = 0; i < n; i++) {
@@ -19,7 +20,9 @@ public class CircularArrayRotation {
         int m;
         while (q -- > 0) {
             m = scanner.nextInt();
-            int index = m + k + 1;
+            m = m % n;
+            int index = m - k;
+            if(index < 0) index += n;
             index = index % n;
             System.out.println(a[index]);
         }
