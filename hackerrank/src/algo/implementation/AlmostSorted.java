@@ -27,11 +27,9 @@ public class AlmostSorted {
         int tj = j+1;
         if(ti < 0) ti=0;
         if(tj >= arr.length) tj=arr.length-1;
-        int sj = j;
-        while (sj > 0 && arr[sj] < arr[j]) sj--;
-        int tmp = arr[j];
-        arr[j] = arr[sj];
-        arr[sj] = tmp;
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
         while (tj > ti  && arr[tj] >= arr[tj-1]) tj--;
         if(tj == ti ) {
             System.out.println("yes\nswap " + (i+1) + " " + (j + 1));
@@ -44,11 +42,11 @@ public class AlmostSorted {
         tj = j-1;
 
         while (ti<tj) {
-            ti++;
-            tj--;
             tmp = arr[ti];
             arr[ti] = arr[tj];
             arr[tj] = tmp;
+            ti++;
+            tj--;
         }
 
 
@@ -64,8 +62,5 @@ public class AlmostSorted {
         else {
             System.out.println("no");
         }
-
-
-
     }
 }
