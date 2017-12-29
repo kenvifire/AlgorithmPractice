@@ -3,6 +3,7 @@ package algo.hackrank.algo.strings;
 import lib.StringUtils;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -28,12 +29,15 @@ public class SherlockAndTheValidString {
         if(size <=1 ) {
             return "YES";
         }else if(valueMap.size() == 2) {
-            int first_key = valueMap.keySet().iterator().next();
-            int second_key = valueMap.keySet().iterator().next();
+            Iterator<Integer> iterator = valueMap.keySet().iterator();
+            int first_key = iterator.next();
+            int second_key = iterator.next();
+            int first_value = valueMap.get(first_key);
+            int second_value = valueMap.get(second_key);
 
 
-            if(valueMap.get(first_key) == 1 && (second_key - first_key) == 1) return "YES";
-            if(valueMap.get(second_key) == 1 && (first_key - second_key) == 1) return "YES";
+            if(first_value == 1 && ((first_key - second_key) == 1 || first_key == 1) ) return "YES";
+            if(second_value == 1 && ((second_key - first_key) == 1 || second_key ==1) ) return "YES";
 
             return "NO";
         }else {
