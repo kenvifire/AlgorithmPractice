@@ -21,7 +21,8 @@ public class WaysToGiveACheck {
                 validPawn = new Point(1, i);
             }
         }
-        Point king = null;
+        Point blackKing = null;
+        Point whiteKing = null;
 
 
         for (int i = 0; i < 8; i++) {
@@ -34,7 +35,11 @@ public class WaysToGiveACheck {
                     }
 
                     if(board[i][j] == 'k') {
-                       king = new Point(i,j);
+                       blackKing = new Point(i,j);
+                    }
+
+                    if(board[i][j] == 'K') {
+                        whiteKing = new Point(i, j);
                     }
                 }
             }
@@ -48,9 +53,18 @@ public class WaysToGiveACheck {
         for (char pro : promoList) {
             board[validPawn.x][validPawn.y] = '#';
             board[promotePaw.x][promotePaw.y] = pro;
-            boolean canCheck = false;
-            for (Point point : pointList) {
-                char piece = board[point.x][point.y];
+            if (!isChecked(board, whiteKing, pointList, false)) {
+                count += isChecked(board, blackKing, pointList, true) ? 1 : 0;
+            }
+        }
+        return count;
+    }
+
+    static boolean isChecked(char[][] board, Point king, List<Point> pointList, boolean isWhite) {
+        boolean canCheck = false;
+        for (Point point : pointList) {
+            char piece = board[point.x][point.y];
+            if (isWhite) {
                 switch (piece) {
                     case 'K':
                         canCheck = checkKing(king, point);
@@ -71,16 +85,32 @@ public class WaysToGiveACheck {
                         canCheck = checkPawn(king, point);
                         break;
                 }
-
-                if (canCheck) {
-                    count += 1;
-                    break;
+            } else {
+                switch (piece) {
+                    case 'k':
+                        canCheck = checkKing(king, point);
+                        break;
+                    case 'q':
+                        canCheck = checkQueen(pointList, king, point);
+                        break;
+                    case 'n':
+                        canCheck = checkKnight(king, point);
+                        break;
+                    case 'b':
+                        canCheck = checkBishop(pointList, king, point);
+                        break;
+                    case 'r':
+                        canCheck = checkRook(pointList, king, point);
+                        break;
+                    case 'p':
+                        canCheck = checkPawn(king, point);
+                        break;
                 }
             }
-        }
-        return count;
-    }
 
+        }
+        return canCheck;
+    }
 
     //8 directions, no obstacle
     static boolean checkQueen(List<Point> pointList, Point king, Point queue) {
@@ -197,11 +227,10 @@ public class WaysToGiveACheck {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int t = in.nextInt();
-        in.nextLine();
         for(int a0 = 0; a0 < t; a0++){
             char[][] board = new char[8][8];
             for(int board_i = 0; board_i < 8; board_i++){
-                board[board_i] = in.nextLine().toCharArray();
+                board[board_i] = in.next().toCharArray();
             }
             int result = waysToGiveACheck(board);
             System.out.println(result);
