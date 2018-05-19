@@ -1,3 +1,5 @@
+import sun.jvm.hotspot.utilities.Assert;
+
 import java.util.*;
 
 /**
@@ -25,18 +27,97 @@ public class H_LinkedList {
        // System.out.println(GetNode(rootA, 1));
        // System.out.println(GetNode(rootA, 2));
        // System.out.println(GetNode(rootA, 3));
-        System.out.println(FindMergeNode(rootA, rootB));
+//        System.out.println(FindMergeNode(rootA, rootB));
+
+        int count = 100;
+
+        while (count -- > 1) {
+            int k = 100;
+            while (k --> 0) {
+                int len1 = new Random().nextInt(100);
+                int len2 = new Random().nextInt(100);
+                int bound = Math.abs(new Random().nextInt(count) + 1) + 1;
 
 
+                validate(generateRandomArray(bound, len1), generateRandomArray(bound,len2));
+            }
+
+
+        }
 
 
     }
     static class Node {
         int data;
         Node next;
+
+
+        @Override
+        public String toString() {
+            return String.valueOf(data) + "," + (next == null? "": next.toString());
+        }
+
     }
 
-    static Node Insert(Node head,int data) {
+    static int[] generateRandomArray(int bound, int length) {
+        if (length == 0) return null;
+        int[] array = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            array[i] = new Random().nextInt(bound);
+        }
+        Arrays.sort(array);
+        return array;
+    }
+
+    static void validate(int[] list1, int[] list2) {
+        if(list1 == null || list2 == null) {
+            System.out.println("list 1:" + Arrays.toString(list1));
+            System.out.println("list 2:" + Arrays.toString(list2));
+        }
+        Node linkeList1 = list1 == null ? null : generateList(list1);
+        Node linkedList2 = list2 == null ? null : generateList(list2);
+        String actual = MergeLists(linkeList1, linkedList2).toString();
+
+        int length = (list1 == null ? 0 : list1.length) + (list2 == null ? 0 : list2.length);
+        int[] resultList = new int[length];
+
+        if (list1 == null) {
+            resultList = Arrays.copyOf(list2, list2.length);
+        } else if(list2 == null) {
+            resultList = Arrays.copyOf(list1, list1.length);
+        } else {
+            System.arraycopy(list1, 0, resultList, 0, list1.length);
+            System.arraycopy(list2, 0, resultList, list1.length, list2.length);
+        }
+        Arrays.sort(resultList);
+
+        String expected = generateList(resultList).toString();
+
+        Assert.that(actual.equals(expected), String.format("expected:[%s], actual[%s]", expected, actual));
+    }
+
+    static Node generateList(int... data) {
+
+        Node head = null;
+        Node tail = null;
+        for (int d : data) {
+            Node node = new Node();
+            node.data=d;
+
+            if(head == null) {
+                head = node;
+                tail = node;
+            } else {
+                tail.next = node;
+                tail = tail.next;
+            }
+
+        }
+        return head;
+    }
+
+    static Node Insert(Node head, int data) {
     // This is a "method-only" submission.
     // You only need to complete this method.
         Node dataNode = new Node();
@@ -173,51 +254,43 @@ public class H_LinkedList {
 
     }
     static Node MergeLists(Node headA, Node headB) {
-        // This is a "method-only" submission.
-        // You only need to complete this method
+        if (headA == null) return headB;
+        if (headB == null) return headA;
+
         Node pA = headA;
         Node pB = headB;
         Node head = null;
+        Node tail = null;
         Node p = null;
+
+        //merge too not empty lists
+
         while(pA != null && pB != null) {
-            if(pA.data < pB.data) {
-                if(p == null) {
-                    head = pA;
-                    p = pA;
-                }else {
-                    p.next = pA;
-                    p = p.next;
-                }
+            if (pA.data < pB.data) {
+                p = pA;
                 pA = pA.next;
-            }else {
-                if(p == null) {
-                    head = pB;
-                    p = pB;
-                }else {
-                    p.next = pB;
-                    p=p.next;
-                }
+            } else {
+                p = pB;
                 pB = pB.next;
             }
-        }
-        while(pA != null) {
-            if(p == null) {
-                return pA;
+            if (head == null) {
+                head = p;
+                tail = p;
+            } else {
+                tail.next = p;
+                tail = tail.next;
             }
-            p.next = pA;
-            pA = pA.next;
         }
 
-        while(pB != null) {
-            if(p == null) {
-                return  pB;
-            }
-            p.next = pB;
-            p = p.next;
-            pB = pB.next;
+        //append first list if there's more elements
+        if (pA != null) {
+            tail.next = pA;
         }
 
-
+        //append second list if there's more elements
+        if (pB != null) {
+            tail.next = pB;
+        }
         return head;
 
     }
