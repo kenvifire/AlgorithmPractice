@@ -8,5 +8,5 @@ while ((i<=N)); do
 	let i=$i+1;
 done
 
-echo "scale=4;$sum/$N" | bc -l  | xargs printf "%.3f"
+echo "scale=4;$sum/$N" | bc -x  | xargs printf "%.3f"
 
