@@ -1,6 +1,6 @@
 package Leecode;
 
-import utils.Assert;
+import utils.AssertUtils;
 
 public class Prob_5_v2 {
     public String longestPalindrome(final String s) {
@@ -70,7 +70,7 @@ public class Prob_5_v2 {
 //        Assert.equals("a", prob_5v2.longestPalindrome("a") );
 //        Assert.equals("a", prob_5v2.longestPalindrome("abcd") );
 //        Assert.equals("", prob_5v2.longestPalindrome("") );
-        Assert.equals("bab", prob_5v2.longestPalindrome("babad") );
+        AssertUtils.equals("bab", prob_5v2.longestPalindrome("babad") );
 //        Assert.equals("bb", prob_5v2.longestPalindrome("cbbd") );
 //        Assert.equals("bb", prob_5v2.longestPalindrome("abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa") );
     }
