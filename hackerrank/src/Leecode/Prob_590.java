@@ -57,7 +57,7 @@ public class Prob_590 {
         Node node1 = new Node(1, Arrays.asList(node3, node2, node4));
 
 
-        PrintUtils.printList(new Prob_590().postorder(node1));
+        PrintUtils.printIntList(new Prob_590().postorder(node1));
 
 
     }

@@ -11,9 +11,15 @@ public class PrintUtils {
       System.out.println();
    }
 
-   public static void printList(List<Integer> list) {
+   public static void printIntList(List<Integer> list) {
       for (int i : list) {
          System.out.printf("%d ", i) ;
+      }
+      System.out.println();
+   }
+   public static void printStringList(List<String> list) {
+      for (String str : list) {
+         System.out.printf("\"%s\" ", str) ;
       }
       System.out.println();
    }
