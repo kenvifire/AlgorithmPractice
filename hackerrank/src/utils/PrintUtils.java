@@ -12,9 +12,11 @@ public class PrintUtils {
    }
 
    public static void printIntList(List<Integer> list) {
+      System.out.printf("[");
       for (int i : list) {
          System.out.printf("%d ", i) ;
       }
+      System.out.printf("]");
       System.out.println();
    }
    public static void printStringList(List<String> list) {
