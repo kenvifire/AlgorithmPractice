@@ -46,13 +46,13 @@ public class Prob_590 {
     }
 
     public static void main(String[] args) {
-        Node node5 = new Node(5, null);
-        Node node6 = new Node(6, null);
+        Node node5 = new Node(5);
+        Node node6 = new Node(6);
 
         Node node3 = new Node(3, Arrays.asList(node5, node6));
 
-        Node node2 = new Node(2, null);
-        Node node4 = new Node(4, null);
+        Node node2 = new Node(2);
+        Node node4 = new Node(4);
 
         Node node1 = new Node(1, Arrays.asList(node3, node2, node4));
 
