@@ -11,6 +11,13 @@ public class PrintUtils {
       }
       System.out.println("]");
    }
+
+   public static void printArray(int[][] arry) {
+       for (int[] arr : arry) {
+           printArray(arr);
+       }
+   }
+
    public static void printArray(String[] array) {
       System.out.printf("[");
       for (int i = 0; i < array.length; i++) {

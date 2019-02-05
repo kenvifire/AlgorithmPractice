@@ -11,7 +11,7 @@ public class MapUtils {
             public Boolean apply(Boolean aBoolean, Boolean aBoolean2) {
                 return aBoolean && aBoolean2;
             }
-        }).get();
+        }).orElse(true);
 
     }
 }
