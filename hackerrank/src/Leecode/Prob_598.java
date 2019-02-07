@@ -1,32 +1,23 @@
 package Leecode;
 
-import lib.Node;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Stack;
 
 public class Prob_598 {
-    public List<Integer> preorder(Node root) {
-        if(root == null) return null;
+    public int maxCount(int m, int n, int[][] ops) {
+        if(ops.length == 0) return m*n;
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        for(int[] op : ops) {
+            if(op[0] < minX) minX = op[0];
 
-        Stack<Node> stack = new Stack<>();
-        stack.add(root);
-
-        List<Integer> result = new ArrayList<>();
-
-        while (!stack.isEmpty()) {
-            Node curr = stack.pop();
-            result.add(curr.val);
-
-            if(curr.children != null) {
-                for (int i = curr.children.size() - 1; i >=0; i--) {
-                    stack.add(curr.children.get(i));
-                }
-            }
+            if(op[1] < minY) minY = op[1];
         }
 
-        return result;
+        return minX * minY;
+
 
     }
 }
