@@ -40,4 +40,10 @@ public class PrintUtils {
       }
       System.out.println();
    }
+
+   public static void printStringListList(List<List<String>> list) {
+       for (List<String> l : list) {
+           printStringList(l);
+       }
+   }
 }
