@@ -1,6 +1,16 @@
 package utils;
 
 public class AssertUtils {
+    public static void assertTrue(boolean actual)  {
+        if(!actual)
+            throw new RuntimeException("Expected true, actual false.");
+    }
+
+    public static void assertFalse(boolean actual) {
+        if(actual)
+            throw new RuntimeException("Expected false, actual true.");
+    }
+
     public static void equals(int expected, int actual) {
         if(expected != actual) {
             throw new RuntimeException(String.format("Expected %d, actual %d.", expected, actual));
