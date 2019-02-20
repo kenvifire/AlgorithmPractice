@@ -1,12 +1,8 @@
 package Leecode;
 
+import lib.TreeNode;
+
 public class Prob_617 {
-    static class TreeNode {
-      int val;
-      TreeNode left;
-      TreeNode right;
-      TreeNode(int x) { val = x; }
-  }
 
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
       TreeNode t3 = null;
