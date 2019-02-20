@@ -1,15 +1,9 @@
 package Leecode;
 
 
-
+import lib.TreeNode;
 
 public class Prob_965 {
-    static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
 
     public boolean isUnivalTree(TreeNode root) {
 
