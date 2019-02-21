@@ -17,6 +17,12 @@ public class AssertUtils {
         }
     }
 
+    public static void equals(double expected, double actual) {
+        if(expected != actual) {
+            throw new RuntimeException(String.format("Expected %f, actual %f.", expected, actual));
+        }
+    }
+
     public static void equals(long expected, float actual) {
         if(expected != actual) {
             throw new RuntimeException(String.format("Expected %f, actual %f.", expected, actual));
