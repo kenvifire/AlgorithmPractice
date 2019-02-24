@@ -10,7 +10,7 @@ public class Prob_876 {
         ListNode head1 = head;
         ListNode head2 = head;
 
-        while(head2 != null & head2.next != null && head2.next.next != null) {
+        while(head2 != null & head2.next != null)  {
             head1 = head1.next;
             head2 = head2.next.next;
         }
