@@ -1,5 +1,9 @@
 package utils;
 
+import lib.ListNode;
+
+import java.util.List;
+
 public class AssertUtils {
     public static void assertTrue(boolean actual)  {
         if(!actual)
@@ -35,5 +39,7 @@ public class AssertUtils {
         }
     }
 
-
+    public static void assertEquals(ListNode exptect, ListNode actual) {
+        equals(exptect == null ?  "[]" : exptect.toString(), actual == null ? "[]" : actual.toString());
+    }
 }
