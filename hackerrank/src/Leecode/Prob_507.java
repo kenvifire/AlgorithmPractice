@@ -1,0 +1,28 @@
+package Leecode;
+
+import utils.AssertUtils;
+
+public class Prob_507 {
+    public boolean checkPerfectNumber(int num) {
+        if(num <= 0) return false;
+
+        int sum = 0;
+        for (int i = 1; i * i <= num; i++) {
+            if(num % i == 0) {
+                sum += i;
+
+                if (i * i != num) {
+                    sum += num / i;
+                }
+            }
+        }
+
+        return sum - num == num;
+    }
+
+    public static void main(String[] args) {
+        Prob_507 prob = new Prob_507();
+        AssertUtils.assertTrue(prob.checkPerfectNumber(6));
+        AssertUtils.assertTrue(prob.checkPerfectNumber(28));
+    }
+}
