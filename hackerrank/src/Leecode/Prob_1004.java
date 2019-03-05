@@ -45,8 +45,8 @@ public class Prob_1004 {
                 total += - numList.get(j);
             }
 
-            if(j > 0 && left >0 && numList.get(j-1) < 0){
-                total += - numList.get(j-1);
+            if(i > 0 && left >0 && numList.get(i-1) < 0){
+                total += - numList.get(i-1);
             }
             value += Math.min(total, left);
 
