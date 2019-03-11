@@ -1,5 +1,6 @@
 package utils;
 
+import com.google.gson.Gson;
 import lib.ListNode;
 
 import java.util.List;
@@ -19,6 +20,12 @@ public class AssertUtils {
         if(expected != actual) {
             throw new RuntimeException(String.format("Expected %d, actual %d.", expected, actual));
         }
+    }
+
+    public static void equals(int[] expected, int[] actual) {
+        String arr1 = new Gson().toJson(expected);
+        String arr2 = new Gson().toJson(actual);
+        equals(arr1, arr2);
     }
 
     public static void equals(double expected, double actual) {
