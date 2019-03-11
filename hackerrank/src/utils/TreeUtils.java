@@ -6,6 +6,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class TreeUtils {
     private static TreeNode NULL_NODE = new TreeNode(-1);
@@ -64,6 +65,32 @@ public class TreeUtils {
         values.toArray(result);
 
         return fromIntArray(result);
+    }
+
+    public static String lelvelString(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            int n = stack.size();
+
+            for (int i = 0; i < n; i++) {
+                TreeNode curr = stack.pop();
+
+                sb.append(curr == null ? "null" : curr.val);
+                if (curr != null)  {
+                   stack.push(curr.left);
+                   stack.push(curr.right);
+                }
+            }
+        }
+
+        sb.append("]");
+        return sb.toString();
+
     }
 
     public static void main(String[] args) {
