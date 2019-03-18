@@ -57,7 +57,7 @@ public class TreeUtils {
             if(ar.equals("null")) {
                 values.add(null);
             } else {
-                values.add(Integer.valueOf(ar));
+                values.add(Integer.valueOf(ar.trim()));
             }
         }
         Integer[] result = new Integer[values.size()];

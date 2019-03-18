@@ -1,14 +1,12 @@
 package Leecode;
 
-import java.util.List;
-
 public class MyLinkedList {
-    private ListNode head;
-    private ListNode tail;
+    private MyListNode head;
+    private MyListNode tail;
     private int size;
 
-    static class ListNode {
-        ListNode next;
+    static class MyListNode {
+        MyListNode next;
         int val;
 
     }
@@ -24,7 +22,7 @@ public class MyLinkedList {
     /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
     public int get(int index) {
         if(size == 0 || index < 0 || index > size) return -1;
-        ListNode p = head;
+        MyListNode p = head;
 
         int cnt = index;
         while (cnt > 0) p = p.next;
@@ -34,7 +32,7 @@ public class MyLinkedList {
 
     /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
     public void addAtHead(int val) {
-        ListNode current = new ListNode();
+        MyListNode current = new MyListNode();
         current.val = val;
 
         current.next = head;
@@ -45,7 +43,7 @@ public class MyLinkedList {
 
     /** Append a node of value val to the last element of the linked list. */
     public void addAtTail(int val) {
-        ListNode current = new ListNode();
+        MyListNode current = new MyListNode();
         current.val = val;
         tail.next = current;
         tail = current;
@@ -60,12 +58,12 @@ public class MyLinkedList {
         } else {
 
 
-            ListNode p = head;
+            MyListNode p = head;
 
             int cnt = index;
 
             while (cnt-- > 1) p = p.next;
-            ListNode current = new ListNode();
+            MyListNode current = new MyListNode();
             current.val = val;
             current.next = p.next;
             p.next = current;
