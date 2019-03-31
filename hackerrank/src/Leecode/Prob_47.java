@@ -22,17 +22,19 @@ public class Prob_47 {
 
     TrieNode root;
     public List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> dupList = permute(nums, 0);
-        List<List<Integer>> result = new ArrayList<>();
+//        List<List<Integer>> dupList = permute(nums, 0);
+//        List<List<Integer>> result = new ArrayList<>();
+//
+//        root = new TrieNode(-1);
+//        for (List<Integer> list : dupList) {
+//            if(!exists(list)) {
+//                add(list);
+//                result.add(list);
+//            }
+//        }
+//        return result;
 
-        root = new TrieNode(-1);
-        for (List<Integer> list : dupList) {
-            if(!exists(list)) {
-                add(list);
-                result.add(list);
-            }
-        }
-        return result;
+        return permute(nums, 0);
 
 
 
@@ -69,6 +71,7 @@ public class Prob_47 {
             result.add(temp);
             return result;
         }
+
 
         for (int i = startPos ; i < nums.length; i++) {
             swap(nums, startPos, i);

@@ -26,6 +26,7 @@ public class PrintUtils {
         System.out.println("]");
     }
 
+
     public static void printIntList(List<Integer> list) {
         System.out.printf("[");
         for (int i : list) {
