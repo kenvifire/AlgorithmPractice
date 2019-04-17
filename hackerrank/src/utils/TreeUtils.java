@@ -82,8 +82,8 @@ public class TreeUtils {
 
                 sb.append(curr == null ? "null" : curr.val);
                 if (curr != null)  {
-                   stack.push(curr.left);
                    stack.push(curr.right);
+                   stack.push(curr.left);
                 }
             }
         }
