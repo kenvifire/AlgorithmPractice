@@ -1,6 +1,5 @@
 package Leecode;
 
-import sun.jvm.hotspot.utilities.Assert;
 
 public class Prob_4 {
 
@@ -54,14 +53,14 @@ public class Prob_4 {
 
     public static void main(String[] args) {
         Prob_4 prob_4 = new Prob_4();
-
-        Assert.that(prob_4.findMedianSortedArrays(new int[] {2, 4, 6}, new int[] {1, 3, 5}) == 3.5, "failed");
-        Assert.that(prob_4.findMedianSortedArrays(new int[] {2, 4, 6, 7}, new int[] {1, 3, 5}) == 4.0, "failed");
-        Assert.that(prob_4.findMedianSortedArrays(new int[] {}, new int[] {1, 3, 5}) == 3.0, "failed");
-        Assert.that(prob_4.findMedianSortedArrays(new int[] {}, new int[] {}) == 0.0, "failed");
-        Assert.that(prob_4.findMedianSortedArrays(new int[] {1, 2, 3, 4}, new int[] {5}) == 3.0, "failed");
-        Assert.that(prob_4.findMedianSortedArrays(new int[] {}, new int[] {2, 3}) == 2.5, "failed");
-        Assert.that(prob_4.findMedianSortedArrays(new int[] {4}, new int[] {1, 2, 3, 5, 6}) == 2.5, "failed");
+//
+//        Assert.that(prob_4.findMedianSortedArrays(new int[] {2, 4, 6}, new int[] {1, 3, 5}) == 3.5, "failed");
+//        Assert.that(prob_4.findMedianSortedArrays(new int[] {2, 4, 6, 7}, new int[] {1, 3, 5}) == 4.0, "failed");
+//        Assert.that(prob_4.findMedianSortedArrays(new int[] {}, new int[] {1, 3, 5}) == 3.0, "failed");
+//        Assert.that(prob_4.findMedianSortedArrays(new int[] {}, new int[] {}) == 0.0, "failed");
+//        Assert.that(prob_4.findMedianSortedArrays(new int[] {1, 2, 3, 4}, new int[] {5}) == 3.0, "failed");
+//        Assert.that(prob_4.findMedianSortedArrays(new int[] {}, new int[] {2, 3}) == 2.5, "failed");
+//        Assert.that(prob_4.findMedianSortedArrays(new int[] {4}, new int[] {1, 2, 3, 5, 6}) == 2.5, "failed");
 
 
     }

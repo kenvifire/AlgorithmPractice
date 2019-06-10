@@ -1,7 +1,6 @@
 package Leecode;
 
 import lib.TreeNode;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

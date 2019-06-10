@@ -1,7 +1,6 @@
 package Leecode;
 
 import lib.ListNode;
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
 
 import java.util.ArrayList;
 import java.util.Collections;

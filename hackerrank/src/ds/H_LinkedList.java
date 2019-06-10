@@ -1,4 +1,3 @@
-import sun.jvm.hotspot.utilities.Assert;
 
 import java.util.*;
 
@@ -94,7 +93,6 @@ public class H_LinkedList {
 
         String expected = generateList(resultList).toString();
 
-        Assert.that(actual.equals(expected), String.format("expected:[%s], actual[%s]", expected, actual));
     }
 
     static Node generateList(int... data) {

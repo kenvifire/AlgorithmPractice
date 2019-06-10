@@ -1,6 +1,5 @@
 package Leecode;
 
-import com.sun.tools.javac.util.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,18 +34,6 @@ public class Prob_3_v2 {
 
     public static void main(String[] args) {
         Prob_3_v2 prob_3V2 = new Prob_3_v2();
-        Assert.check(prob_3V2.lengthOfLongestSubstring("dvdf") == 3);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("") == 0);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("ab") == 2);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("abc") == 3);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("aaa") == 1);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("aba") == 2);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("aab") == 2);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("aaabbb") == 2);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("aaabbbcd") == 3);
 
-        Assert.check(prob_3V2.lengthOfLongestSubstring("abcabcbb") == 3);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("bbbbb") == 1);
-        Assert.check(prob_3V2.lengthOfLongestSubstring("pwwkew") == 3);
     }
 }
