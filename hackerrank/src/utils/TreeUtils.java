@@ -52,14 +52,18 @@ public class TreeUtils {
         List<Integer> values = new ArrayList<>();
 
         String[] arr = string.split(",");
+        if(arr.length == 0) return null;
 
         for (String ar: arr) {
+            if(ar.trim().equals("")) continue;
             if(ar.equals("null")) {
                 values.add(null);
             } else {
                 values.add(Integer.valueOf(ar.trim()));
             }
         }
+
+        if(values.size() <=0 ) return null;
         Integer[] result = new Integer[values.size()];
 
         values.toArray(result);
