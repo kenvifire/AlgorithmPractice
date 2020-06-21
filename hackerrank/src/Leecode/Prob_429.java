@@ -1,13 +1,11 @@
 package Leecode;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 import lib.Node;
-import utils.JGraphXAdapterDemo;
 import utils.PrintUtils;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
