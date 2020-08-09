@@ -5,3 +5,8 @@ hackerrank/out/*
 py/.idea/*
 hackerrank/cpp/.idea/*
 .DS_Store
+.gradle
+gradle/
+gradlew
+gradlew.bat
+out/
