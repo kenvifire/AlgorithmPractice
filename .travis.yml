@@ -1,3 +1,31 @@
-language: bash
-
-
+language: ruby
+rvm:
+  - 2.2
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install python3
+before_deploy:
+  - rvm 2.2 do gem install aws-sdk -v 2.1.36
+script:
+  - python3 hackerrank/build.py .
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: www.itluobo.com
+    local-dir: build
+    acl: public_read
+    on:
+      repo: kenvifire/Articles
+    skip_cleanup: 'true'
+    region: us-west-2
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY_ID
+    secret_access_key: $AWS_SECRET_ACCESS_KEY
+    bucket: www.itluobo.com
+    local-dir: docs
+    acl: public_read
+    on:
+      repo: kenvifire/AlgorithmPractice
+    skip_cleanup: 'true'
+    region: us-west-2
