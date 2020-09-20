@@ -2,6 +2,9 @@ package Leecode;
 
 import utils.AssertUtils;
 
+/**
+ * https://leetcode.com/problems/range-sum-query-immutable/
+ */
 public class NumArray {
     long sum[];
     int[] nums;
